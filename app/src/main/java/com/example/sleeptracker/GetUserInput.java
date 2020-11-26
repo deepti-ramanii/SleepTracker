@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class GetUserInput extends AppCompatActivity {
+public class GetUserInput extends AppCompatActivity implements RatingDialog.RatingDialogListener {
     private SleepStatsDatabase sleepStatsDatabase;
     private Button sleepWakeButton;
     private boolean hasStoredSleepTime;
     private long storedSleepTime;
+    private int storedRating;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,11 +43,17 @@ public class GetUserInput extends AppCompatActivity {
         storedSleepTime = savedInstanceState.getLong("StoredSleepTime");
     }
 
+    @Override
+    public void apply(int rating) {
+        storedRating = rating;
+    }
+
     public void setTimes(View view) {
         long currTime = Calendar.getInstance().getTimeInMillis();
         if(hasStoredSleepTime) {
             //if we already have a stored sleep time, log a wake up time
-            sleepStatsDatabase.insert(storedSleepTime, currTime, 0);
+            setRating();
+            sleepStatsDatabase.insert(storedSleepTime, currTime, storedRating);
             sleepWakeButton.setText("Sleep");
         } else {
             //otherwise log a sleep time
@@ -54,5 +61,10 @@ public class GetUserInput extends AppCompatActivity {
             sleepWakeButton.setText("Wake Up");
         }
         hasStoredSleepTime = !hasStoredSleepTime;
+    }
+
+    public void setRating() {
+        RatingDialog ratingDialog = new RatingDialog();
+        ratingDialog.show(getSupportFragmentManager(), "submit rating");
     }
 }
