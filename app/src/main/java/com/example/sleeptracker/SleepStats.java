@@ -1,5 +1,8 @@
 package com.example.sleeptracker;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class SleepStats {
     private long sleepTime;
     private long wakeTime;
@@ -27,5 +30,12 @@ public class SleepStats {
 
     public double getHoursSlept() {
         return this.hoursSlept;
+    }
+
+    public static String getDate(long datetimeInMilliseconds) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(datetimeInMilliseconds);
+        return formatter.format(calendar.getTime());
     }
 }
