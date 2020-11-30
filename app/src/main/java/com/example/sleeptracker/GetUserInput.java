@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class GetUserInput extends AppCompatActivity implements RatingDialog.RatingDialogListener {
     private SleepStatsDatabase sleepStatsDatabase;
@@ -51,12 +53,10 @@ public class GetUserInput extends AppCompatActivity implements RatingDialog.Rati
     public void setTimes(View view) {
         long currTime = Calendar.getInstance().getTimeInMillis();
         if(hasStoredSleepTime) {
-            //if we already have a stored sleep time, log a wake up time
             setRating();
             sleepStatsDatabase.insert(storedSleepTime, currTime, storedRating);
             sleepWakeButton.setText("Sleep");
         } else {
-            //otherwise log a sleep time
             storedSleepTime = currTime;
             sleepWakeButton.setText("Wake Up");
         }

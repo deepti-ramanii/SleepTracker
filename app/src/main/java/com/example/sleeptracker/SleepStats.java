@@ -1,9 +1,10 @@
 package com.example.sleeptracker;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class SleepStats {
+    private static final int MILLISECONDS_PER_HOUR = 3600000;
     private long sleepTime;
     private long wakeTime;
     private int rating;
@@ -13,7 +14,7 @@ public class SleepStats {
         this.sleepTime = sleepTime;
         this.wakeTime = wakeTime;
         this.rating = rating;
-        this.hoursSlept = (double)((wakeTime - sleepTime) / 3600000);
+        this.hoursSlept = (double)((wakeTime - sleepTime) / MILLISECONDS_PER_HOUR);
     }
 
     public long getSleepTime() {
@@ -32,10 +33,21 @@ public class SleepStats {
         return this.hoursSlept;
     }
 
-    public static String getDate(long datetimeInMilliseconds) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(datetimeInMilliseconds);
-        return formatter.format(calendar.getTime());
+    public String toString() {
+        return "Sleep stats on " + getDateFromLong(sleepTime).toString() + ": slept " + hoursSlept + " hours, " + rating + "/10";
+    }
+
+    public static Date getDateFromLong(long dateInMilliseconds) {
+        return new Date(dateInMilliseconds);
+    }
+
+    public static long getBeginningOfDay(int day, int month, int year) {
+        Date date = new Date(year - 1900, month - 1, day, 0, 0, 0);
+        return date.getTime();
+    }
+
+    public static long getEndOfDay(int day, int month, int year) {
+        Date date = new Date(year - 1900, month - 1, day, 23, 59, 59);
+        return date.getTime();
     }
 }
