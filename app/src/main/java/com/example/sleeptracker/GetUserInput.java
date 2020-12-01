@@ -3,12 +3,10 @@ package com.example.sleeptracker;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import java.util.Calendar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Calendar;
 
 public class GetUserInput extends AppCompatActivity implements RatingDialog.RatingDialogListener {
     private SleepStatsDatabase sleepStatsDatabase;
@@ -43,20 +41,13 @@ public class GetUserInput extends AppCompatActivity implements RatingDialog.Rati
         storedSleepTime = savedInstanceState.getLong("StoredSleepTime");
     }
 
-    @Override
-    public void apply(int rating) {
-        storedRating = rating;
-    }
-
     public void setTimes(View view) {
         long currTime = Calendar.getInstance().getTimeInMillis();
         if(hasStoredSleepTime) {
-            //if we already have a stored sleep time, log a wake up time
             setRating();
             sleepStatsDatabase.insert(storedSleepTime, currTime, storedRating);
             sleepWakeButton.setText("Sleep");
         } else {
-            //otherwise log a sleep time
             storedSleepTime = currTime;
             sleepWakeButton.setText("Wake Up");
         }
@@ -66,5 +57,10 @@ public class GetUserInput extends AppCompatActivity implements RatingDialog.Rati
     public void setRating() {
         RatingDialog ratingDialog = new RatingDialog();
         ratingDialog.show(getSupportFragmentManager(), "submit rating");
+    }
+
+    @Override
+    public void apply(int rating) {
+        storedRating = rating;
     }
 }
