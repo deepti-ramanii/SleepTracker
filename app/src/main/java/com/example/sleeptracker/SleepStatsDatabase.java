@@ -10,45 +10,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SleepStatsDatabase extends SQLiteOpenHelper {
+    //database info
+    private static final String SLEEP_STATS_DB_NAME = "SLEEP_STATS.DB";
+    private static final int SLEEP_STATS_DB_VERSION = 1;
     public static final String SLEEP_STATS_TABLE = "SLEEP_STATS";
-
+    //table column info
     public static final String ID = "ID";
-    //Store date/time as a single number (using Calendar)
     public static final String SLEEP_TIME = "SLEEP_TIME";
     public static final String WAKE_TIME = "WAKE_TIME";
-    //integer rating of sleep quality from 0 (worst) to 5 (best)
     public static final String RATING = "RATING";
 
-    private static final String SLEEP_STATS_DB_NAME = "SLEEP_STATS.DB";
-    private static final int SLEEP_STATS_VERSION = 1;
-
     private static SleepStatsDatabase instance = null;
-    private static Context context = null;
 
-    //this is called the first time a database is accessed
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create = "CREATE TABLE " + SLEEP_STATS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SLEEP_TIME + " INTEGER, " + WAKE_TIME + " INTEGER, " + RATING + " INTEGER)";
         db.execSQL(create);
     }
 
-    //this is called if the database version number changes
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + SLEEP_STATS_TABLE);
         onCreate(db);
     }
 
-    //makes SleepStatsDatabase a singleton class (only one shared instance across the app)
-    public static synchronized SleepStatsDatabase getInstance(Context c) {
+    public static synchronized SleepStatsDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = new SleepStatsDatabase(c.getApplicationContext());
+            instance = new SleepStatsDatabase(context.getApplicationContext());
         }
         return instance;
     }
 
-    private SleepStatsDatabase(Context c) {
-        super(c, SLEEP_STATS_DB_NAME, null, SLEEP_STATS_VERSION);
+    private SleepStatsDatabase(Context context) {
+        super(context, SLEEP_STATS_DB_NAME, null, SLEEP_STATS_DB_VERSION);
     }
 
     public void insert(long sleepTime, long wakeUpTime, int rating) {
@@ -70,6 +64,8 @@ public class SleepStatsDatabase extends SQLiteOpenHelper {
             cursor.moveToPosition(i);
             sleepStats.add(new SleepStats(cursor.getLong(1), cursor.getLong(2), cursor.getInt(3)));
         }
+        cursor.close();
+        database.close();
         return sleepStats;
     }
 }
