@@ -9,6 +9,17 @@ public class SleepStats {
     private int rating;
     private double hoursSlept;
 
+    /*
+    private double averageHoursSlept;
+    private double averageRating;
+    public averageHours() {
+
+    }
+    public averageRating() {
+
+    }
+    */
+
     public SleepStats(long sleepTime, long wakeTime, int rating) {
         this.sleepTime = sleepTime;
         this.wakeTime = wakeTime;
