@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_get_input" >
+    android:id="@+id/layout_get_sleep_info" >
 
     <Button
         android:id="@+id/sleep_wake_button"
@@ -11,5 +11,12 @@
         android:layout_height="60dp"
         android:text="Sleep"
         android:onClick="setTimes"/>
+
+    <Button
+        android:id="@+id/go_to_display_stats"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:text="Go to display stats"
+        android:onClick="goToDisplayStats"/>
 
 </LinearLayout>

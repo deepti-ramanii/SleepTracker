@@ -1,14 +1,16 @@
 package com.example.sleeptracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import java.util.Calendar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GetUserInput extends AppCompatActivity implements RatingDialog.RatingDialogListener {
+public class GetSleepInfo extends AppCompatActivity implements RatingDialog.RatingDialogListener {
     private SleepStatsDatabase sleepStatsDatabase;
     private Button sleepWakeButton;
     private boolean hasStoredSleepTime;
@@ -18,7 +20,7 @@ public class GetUserInput extends AppCompatActivity implements RatingDialog.Rati
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_get_input);
+        setContentView(R.layout.layout_get_sleep_info);
         sleepStatsDatabase = SleepStatsDatabase.getInstance(this);
         sleepWakeButton = this.findViewById(R.id.sleep_wake_button);
         hasStoredSleepTime = false;
@@ -52,6 +54,11 @@ public class GetUserInput extends AppCompatActivity implements RatingDialog.Rati
             sleepWakeButton.setText("Wake Up");
         }
         hasStoredSleepTime = !hasStoredSleepTime;
+    }
+
+    public void goToDisplayStats(View view) {
+        Intent activitySwitchIntent = new Intent(GetSleepInfo.this, DisplayStats.class);
+        startActivity(activitySwitchIntent);
     }
 
     public void setRating() {

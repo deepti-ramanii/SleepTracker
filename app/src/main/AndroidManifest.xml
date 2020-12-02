@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SleepTracker" >
         <activity
-            android:label="Get User Input"
-            android:name=".GetUserInput" >
+            android:label="Get Sleep Info"
+            android:name=".GetSleepInfo" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="Display Stats"
+            android:name=".DisplayStats" />
     </application>
 
 </manifest>
