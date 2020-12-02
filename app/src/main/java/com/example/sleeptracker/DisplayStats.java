@@ -3,7 +3,7 @@ package com.example.sleeptracker;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import br.com.sapereaude.maskedEditText.MaskedEditText;
+import br.com.sapereaude.maskedEditText.MaskedEditText; // https://www.geeksforgeeks.org/how-to-add-mask-to-an-edittext-in-android/ -> tutorial for creating a masked EditText
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
