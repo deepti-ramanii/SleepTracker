@@ -26,12 +26,12 @@ public class DisplayStats extends AppCompatActivity {
 
     public void getStats(View view) {
         int startDay = Integer.parseInt(startDate.getText().toString().substring(0, 2));
-        int startMonth = Integer.parseInt(startDate.getText().toString().substring(2, 4));
-        int startYear = Integer.parseInt(startDate.getText().toString().substring(4, 8));
+        int startMonth = Integer.parseInt(startDate.getText().toString().substring(3, 5));
+        int startYear = Integer.parseInt(startDate.getText().toString().substring(6, 10));
 
         int endDay = Integer.parseInt(endDate.getText().toString().substring(0, 2));
-        int endMonth = Integer.parseInt(endDate.getText().toString().substring(2, 4));
-        int endYear = Integer.parseInt(endDate.getText().toString().substring(4, 8));
+        int endMonth = Integer.parseInt(endDate.getText().toString().substring(3, 5));
+        int endYear = Integer.parseInt(endDate.getText().toString().substring(6, 10));
 
         List<SleepStats> sleepStats = sleepStatsDatabase.getBetweenDates(SleepStats.getBeginningOfDay(startDay, startMonth, startYear), SleepStats.getEndOfDay(endDay, endMonth, endYear));
         //TODO: do stuff with these stats
