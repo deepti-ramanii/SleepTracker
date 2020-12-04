@@ -13,27 +13,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="Get stats from "
+            android:text="View stats from "
             android:textSize="20dp"/>
         <br.com.sapereaude.maskedEditText.MaskedEditText
             android:id="@+id/start_date"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_weight="20.0"
             android:inputType="date"
             android:hint="DDMMYYYY"
             app:mask="##/##/####" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_weight="30.0"
-            android:text="to"
+            android:text=" to "
             android:textSize="20dp"/>
         <br.com.sapereaude.maskedEditText.MaskedEditText
             android:id="@+id/end_date"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_weight="20.0"
             android:inputType="date"
             android:hint="DDMMYYYY"
             app:mask="##/##/####"/>
@@ -43,7 +40,7 @@
         android:id="@+id/get_date_bounds"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
-        android:text="Get Stats"
+        android:text="Go"
         android:onClick="getStats"/>
 
 </LinearLayout>
