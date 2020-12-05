@@ -35,12 +35,30 @@
             android:hint="DDMMYYYY"
             app:mask="##/##/####"/>
     </LinearLayout>
-    
+
     <Button
         android:id="@+id/get_date_bounds"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
         android:text="Go"
         android:onClick="getStats"/>
+
+    <TableLayout
+        android:id="@+id/table_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/tableText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No data selected." />
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>
