@@ -47,7 +47,7 @@ public class DisplayStats extends AppCompatActivity {
     }
 
     public String roundMethod(double round) {
-        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("0.00");
         df.setRoundingMode(RoundingMode.UP);
         return df.format(round);
     }
