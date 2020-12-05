@@ -1,5 +1,4 @@
 package com.example.sleeptracker;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,11 +8,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class DisplayStats extends AppCompatActivity {
     private SleepStatsDatabase sleepStatsDatabase;
     private MaskedEditText startDate;
     private MaskedEditText endDate;
+    private double totalHoursSlept;
+    private double totalRating;
+    private double divideCounter = 0;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +39,25 @@ public class DisplayStats extends AppCompatActivity {
 
         List<SleepStats> sleepStats = sleepStatsDatabase.getBetweenDates(SleepStats.getBeginningOfDay(startDay, startMonth, startYear), SleepStats.getEndOfDay(endDay, endMonth, endYear));
         //TODO: do stuff with these stats
+        for(SleepStats stats : sleepStats) {
+            totalHoursSlept += stats.getHoursSlept();
+            totalRating += stats.getRating();
+            divideCounter++;
+        }
     }
+
+    public String roundMethod(double round) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.UP);
+        return df.format(round);
+    }
+
+    public String averageHours() {
+        return roundMethod(totalHoursSlept / divideCounter);
+    }
+
+    public String averageRating() {
+        return roundMethod(totalRating / divideCounter);
+    }
+
 }
