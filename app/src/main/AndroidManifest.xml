@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:label="Display Stats"
-            android:name=".DisplayStats" />
+            android:name=".DisplayCustomStats" />
     </application>
 
 </manifest>
