@@ -17,7 +17,9 @@ public class DisplayStats extends AppCompatActivity {
     private MaskedEditText endDate;
     private double totalHoursSlept;
     private double totalRating;
-    private double divideCounter = 0;
+    private double divide;
+    private long totalWhenSleep = 0;
+    private long totalWhenWake = 0;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +44,10 @@ public class DisplayStats extends AppCompatActivity {
         for(SleepStats stats : sleepStats) {
             totalHoursSlept += stats.getHoursSlept();
             totalRating += stats.getRating();
-            divideCounter++;
+            totalWhenSleep = Long.sum(totalWhenSleep, stats.getSleepTime());
+            totalWhenWake = Long.sum(totalWhenWake, stats.getWakeTime());
         }
+        divide = sleepStats.size();
     }
 
     public String roundMethod(double round) {
@@ -53,11 +57,33 @@ public class DisplayStats extends AppCompatActivity {
     }
 
     public String averageHours() {
-        return roundMethod(totalHoursSlept / divideCounter);
+        return roundMethod(totalHoursSlept / divide);
     }
 
     public String averageRating() {
-        return roundMethod(totalRating / divideCounter);
+        return roundMethod(totalRating / divide);
+    }
+
+    public String averageSleepTime() {
+        double result = ((totalWhenSleep / divide) / 3600000);
+        if (result > 12) {
+            result = result - 12;
+            String finalString = roundMethod(result);
+            return finalString + "PM";
+        } else {
+            return roundMethod(result) + "AM";
+        }
+    }
+
+    public String averageWakeTime() {
+        double result = ((totalWhenWake / divide) / 3600000);
+        if (result > 12) {
+            result = result - 12;
+            String finalString = roundMethod(result);
+            return finalString + "PM";
+        } else {
+            return roundMethod(result) + "AM";
+        }
     }
 
 }
