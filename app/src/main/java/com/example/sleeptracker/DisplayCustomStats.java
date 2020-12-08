@@ -1,4 +1,5 @@
 package com.example.sleeptracker;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -28,8 +29,8 @@ public class DisplayCustomStats extends AppCompatActivity {
 
     private double totalHoursSlept = 0.0;
     private double totalRating = 0.0;
-    private long totalWhenSleep = 0;
-    private long totalWhenWake = 0;
+    private long totalSleepTime = 0;
+    private long totalWakeTime = 0;
     private int numStats;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,26 +67,26 @@ public class DisplayCustomStats extends AppCompatActivity {
 
             totalHoursSlept += stats.getHoursSlept();
             totalRating += stats.getRating();
-            totalWhenSleep = Long.sum(totalWhenSleep, stats.getSleepTime());
-            totalWhenWake = Long.sum(totalWhenWake, stats.getWakeTime());
+            totalSleepTime = Long.sum(totalSleepTime, stats.getSleepTime());
+            totalWakeTime = Long.sum(totalWakeTime, stats.getWakeTime());
 
             numStats++;
         }
         LineGraphSeries<DataPoint> sleepQuality = new LineGraphSeries<DataPoint>(sleepQualityData);
         sleepQualityGraph.addSeries(sleepQuality);
-        avgSleepTime.setText(averageTime(totalWhenSleep, numStats));
-        avgWakeTime.setText(averageTime(totalWhenWake, numStats));
+        avgSleepTime.setText(averageTime(totalSleepTime, numStats));
+        avgWakeTime.setText(averageTime(totalWakeTime, numStats));
         avgHoursSleep.setText(roundToTwoDecimals(totalHoursSlept / numStats));
         avgSleepQuality.setText(roundToTwoDecimals(totalRating / numStats) + "/10");
         this.findViewById(R.id.average_sleep_wake_times_labels).setVisibility(View.VISIBLE);
         this.findViewById(R.id.average_sleep_stats_labels).setVisibility(View.VISIBLE);
     }
 
-    public String roundToTwoDecimals(double round) {
+    private String roundToTwoDecimals(double round) {
         return String.format("%.2f", round);
     }
 
-    public String averageTime(long totalTime, int numTimes) {
+    private String averageTime(long totalTime, int numTimes) {
         Date date = SleepStats.getDateFromLong(totalTime / numTimes);
         String time = (date.getHours() % 12) + ":" + date.getMinutes() + ":" + date.getSeconds();
         if (date.getHours() >= 12) {
@@ -98,10 +99,15 @@ public class DisplayCustomStats extends AppCompatActivity {
         numStats = 0;
         totalHoursSlept = 0;
         totalRating = 0;
-        totalWhenSleep = 0;
-        totalWhenWake = 0;
+        totalSleepTime = 0;
+        totalWakeTime = 0;
         sleepQualityGraph.removeAllSeries();
         this.findViewById(R.id.average_sleep_wake_times_labels).setVisibility(View.INVISIBLE);
         this.findViewById(R.id.average_sleep_stats_labels).setVisibility(View.INVISIBLE);
+    }
+
+    public void goToGetSleepInfo(View view) {
+        Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, GetSleepInfo.class);
+        startActivity(activitySwitchIntent);
     }
 }

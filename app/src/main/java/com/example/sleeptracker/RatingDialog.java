@@ -33,7 +33,7 @@ public class RatingDialog extends AppCompatDialogFragment {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
                        int rating = Integer.parseInt(ratingInput.getText().toString());
-                       listener.apply(rating);
+                       listener.applyRating(rating);
                    }
                });
 
@@ -48,6 +48,6 @@ public class RatingDialog extends AppCompatDialogFragment {
     }
 
     public interface RatingDialogListener {
-        void apply(int rating);
+        void applyRating(int rating);
     }
 }

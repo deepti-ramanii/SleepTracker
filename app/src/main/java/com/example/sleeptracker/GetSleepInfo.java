@@ -56,18 +56,18 @@ public class GetSleepInfo extends AppCompatActivity implements RatingDialog.Rati
         hasStoredSleepTime = !hasStoredSleepTime;
     }
 
-    public void goToDisplayStats(View view) {
-        Intent activitySwitchIntent = new Intent(GetSleepInfo.this, DisplayCustomStats.class);
-        startActivity(activitySwitchIntent);
-    }
-
     public void setRating() {
         RatingDialog ratingDialog = new RatingDialog();
         ratingDialog.show(getSupportFragmentManager(), "submit rating");
     }
 
     @Override
-    public void apply(int rating) {
+    public void applyRating(int rating) {
         storedRating = rating;
+    }
+
+    public void goToDisplayStats(View view) {
+        Intent activitySwitchIntent = new Intent(GetSleepInfo.this, DisplayCustomStats.class);
+        startActivity(activitySwitchIntent);
     }
 }

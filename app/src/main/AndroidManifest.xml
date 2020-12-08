@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Display Stats"
+            android:label="Display Custom Stats"
             android:name=".DisplayCustomStats" />
     </application>
 
