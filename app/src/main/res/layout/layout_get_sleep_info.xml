@@ -1,22 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_get_sleep_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_get_sleep_info" >
-
+    android:orientation="vertical">
     <Button
         android:id="@+id/sleep_wake_button"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
-        android:text="Sleep"
-        android:onClick="setTimes"/>
+        android:onClick="setTimes"
+        android:text="Sleep" />
 
-    <Button
-        android:id="@+id/go_to_display_stats"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="60dp"
-        android:text="Go to display stats"
-        android:onClick="goToDisplayStats"/>
-
-</LinearLayout>
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layout_alignParentBottom="true">
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_bedtime_24"
+            android:layout_weight="50.0"/>
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_show_chart_24"
+            android:layout_weight="50.0"
+            android:onClick="goToDisplayStats"/>
+    </LinearLayout>
+</RelativeLayout>

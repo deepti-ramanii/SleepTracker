@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Display Stats"
-            android:name=".DisplayStats" />
+            android:label="Display Custom Stats"
+            android:name=".DisplayCustomStats" />
     </application>
 
 </manifest>
