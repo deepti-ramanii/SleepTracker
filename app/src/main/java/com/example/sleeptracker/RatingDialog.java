@@ -27,6 +27,7 @@ public class RatingDialog extends AppCompatDialogFragment {
                .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
+                       listener.applyRating(0);
                    }
                })
                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {

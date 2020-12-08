@@ -50,36 +50,57 @@ public class DisplayCustomStats extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void getStats(View view) {
-        int startDay = Integer.parseInt(startDate.getText().toString().substring(0, 2));
-        int startMonth = Integer.parseInt(startDate.getText().toString().substring(3, 5));
-        int startYear = Integer.parseInt(startDate.getText().toString().substring(6, 10));
-
-        int endDay = Integer.parseInt(endDate.getText().toString().substring(0, 2));
-        int endMonth = Integer.parseInt(endDate.getText().toString().substring(3, 5));
-        int endYear = Integer.parseInt(endDate.getText().toString().substring(6, 10));
-
-        List<SleepStats> sleepStats = sleepStatsDatabase.getBetweenDates(SleepStats.getBeginningOfDay(startDay, startMonth, startYear), SleepStats.getEndOfDay(endDay, endMonth, endYear));
-        resetPreviousStats();
-
-        DataPoint[] sleepQualityData = new DataPoint[sleepStats.size()];
-        for(SleepStats stats : sleepStats) {
-            sleepQualityData[numStats] = new DataPoint(numStats, stats.getRating());
-
-            totalHoursSlept += stats.getHoursSlept();
-            totalRating += stats.getRating();
-            totalSleepTime = Long.sum(totalSleepTime, stats.getSleepTime());
-            totalWakeTime = Long.sum(totalWakeTime, stats.getWakeTime());
-
-            numStats++;
+        boolean hasValidInput = true;
+        if(startDate.getText().toString() == null || startDate.getText().toString().length() < 10) {
+            startDate.setError("Please enter a valid date.");
+            hasValidInput = false;
         }
-        LineGraphSeries<DataPoint> sleepQuality = new LineGraphSeries<DataPoint>(sleepQualityData);
-        sleepQualityGraph.addSeries(sleepQuality);
-        avgSleepTime.setText(averageTime(totalSleepTime, numStats));
-        avgWakeTime.setText(averageTime(totalWakeTime, numStats));
-        avgHoursSleep.setText(roundToTwoDecimals(totalHoursSlept / numStats));
-        avgSleepQuality.setText(roundToTwoDecimals(totalRating / numStats) + "/10");
-        this.findViewById(R.id.average_sleep_wake_times_labels).setVisibility(View.VISIBLE);
-        this.findViewById(R.id.average_sleep_stats_labels).setVisibility(View.VISIBLE);
+        if(endDate.getText().toString() == null || startDate.getText().toString().length() < 10) {
+            endDate.setError("Please enter a valid date.");
+            hasValidInput = false;
+        }
+        if(hasValidInput) {
+            int startDay = Integer.parseInt(startDate.getText().toString().substring(0, 2));
+            int startMonth = Integer.parseInt(startDate.getText().toString().substring(3, 5));
+            int startYear = Integer.parseInt(startDate.getText().toString().substring(6, 10));
+            if (!isValidDate(startDay, startMonth, startYear)) {
+                startDate.setError("Invalid date.");
+                hasValidInput = false;
+            }
+
+            int endDay = Integer.parseInt(endDate.getText().toString().substring(0, 2));
+            int endMonth = Integer.parseInt(endDate.getText().toString().substring(3, 5));
+            int endYear = Integer.parseInt(endDate.getText().toString().substring(6, 10));
+            if (!isValidDate(endDay, endMonth, endYear)) {
+                endDate.setError("Invalid date.");
+                hasValidInput = false;
+            }
+
+            if(hasValidInput) {
+                List<SleepStats> sleepStats = sleepStatsDatabase.getBetweenDates(SleepStats.getBeginningOfDay(startDay, startMonth, startYear), SleepStats.getEndOfDay(endDay, endMonth, endYear));
+                resetPreviousStats();
+
+                DataPoint[] sleepQualityData = new DataPoint[sleepStats.size()];
+                for (SleepStats stats : sleepStats) {
+                    sleepQualityData[numStats] = new DataPoint(numStats, stats.getRating());
+
+                    totalHoursSlept += stats.getHoursSlept();
+                    totalRating += stats.getRating();
+                    totalSleepTime = Long.sum(totalSleepTime, stats.getSleepTime());
+                    totalWakeTime = Long.sum(totalWakeTime, stats.getWakeTime());
+
+                    numStats++;
+                }
+                LineGraphSeries<DataPoint> sleepQuality = new LineGraphSeries<DataPoint>(sleepQualityData);
+                sleepQualityGraph.addSeries(sleepQuality);
+                avgSleepTime.setText(averageTime(totalSleepTime, numStats));
+                avgWakeTime.setText(averageTime(totalWakeTime, numStats));
+                avgHoursSleep.setText(roundToTwoDecimals(totalHoursSlept / numStats));
+                avgSleepQuality.setText(roundToTwoDecimals(totalRating / numStats) + "/10");
+                this.findViewById(R.id.average_sleep_wake_times_labels).setVisibility(View.VISIBLE);
+                this.findViewById(R.id.average_sleep_stats_labels).setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private String roundToTwoDecimals(double round) {
@@ -104,6 +125,22 @@ public class DisplayCustomStats extends AppCompatActivity {
         sleepQualityGraph.removeAllSeries();
         this.findViewById(R.id.average_sleep_wake_times_labels).setVisibility(View.INVISIBLE);
         this.findViewById(R.id.average_sleep_stats_labels).setVisibility(View.INVISIBLE);
+    }
+
+    private boolean isValidDate(int day, int month, int year) {
+        int numDays = -1;
+        if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+            numDays = 31;
+        } else if(month == 4 || month == 6 || month == 9 || month == 11) {
+            numDays = 30;
+        } else if(month == 2) {
+            if(year % 4 == 0) {
+                numDays = 29;
+            } else {
+                numDays = 29;
+            }
+        }
+        return (month <= 12 && day <= numDays);
     }
 
     public void goToGetSleepInfo(View view) {
