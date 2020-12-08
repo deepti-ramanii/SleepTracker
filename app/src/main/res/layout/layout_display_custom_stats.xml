@@ -63,77 +63,81 @@
             android:layout_height="300dp" />
 
         <LinearLayout
+            android:id="@+id/display_stat_averages"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-            <TextView
-                android:id="@+id/average_sleep_time"
+            android:orientation="vertical"
+            android:visibility="invisible">
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_weight="50.0"
-                android:textSize="30dp"/>
-            <TextView
-                android:id="@+id/average_wake_time"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+                <TextView
+                    android:id="@+id/average_sleep_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="50.0"
+                    android:textSize="30dp"/>
+                <TextView
+                    android:id="@+id/average_wake_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="50.0"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_weight="50.0"
-                android:textSize="30dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50.0"
+                    android:text="Average sleep time"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50.0"
+                    android:text="Average wake time"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+                <TextView
+                    android:id="@+id/average_hours_sleep"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="50.0"
+                    android:textSize="30dp"/>
+                <TextView
+                    android:id="@+id/average_sleep_quality"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="50.0"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50.0"
+                    android:text="Average hours of sleep"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="50.0"
+                    android:text="Average sleep quality"/>
+            </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/average_sleep_wake_times_labels"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            android:weightSum="100">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50.0"
-                android:text="Average sleep time"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50.0"
-                android:text="Average wake time"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
-            <TextView
-                android:id="@+id/average_hours_sleep"
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_weight="50.0"
-                android:textSize="30dp"/>
-            <TextView
-                android:id="@+id/average_sleep_quality"
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_weight="50.0"
-                android:textSize="30dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/average_sleep_stats_labels"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="invisible"
-            android:weightSum="100">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50.0"
-                android:text="Average hours of sleep"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="30dp"
-                android:layout_weight="50.0"
-                android:text="Average sleep quality"/>
-        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
