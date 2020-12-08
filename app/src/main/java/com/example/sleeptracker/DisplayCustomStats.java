@@ -88,7 +88,6 @@ public class DisplayCustomStats extends AppCompatActivity {
                         sleepQualityData.appendData(new DataPoint(numRatings, stats.getRating()), true, sleepStats.size());
                         numRatings++;
                     }
-
                     totalHoursSlept += stats.getHoursSlept();
                     totalSleepTime = Long.sum(totalSleepTime, stats.getSleepTime());
                     totalWakeTime = Long.sum(totalWakeTime, stats.getWakeTime());
@@ -128,9 +127,9 @@ public class DisplayCustomStats extends AppCompatActivity {
         totalSleepTime = 0;
         totalWakeTime = 0;
         sleepQualityGraph.removeAllSeries();
-        this.findViewById(R.id.display_stat_averages).setVisibility(View.INVISIBLE);
     }
 
+    //TODO: maybe make this a little nicer
     private boolean isValidDate(int day, int month, int year) {
         int numDays = -1;
         if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
