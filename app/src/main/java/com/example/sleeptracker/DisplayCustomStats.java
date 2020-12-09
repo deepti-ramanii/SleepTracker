@@ -17,8 +17,11 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //displays sleep stats between a set of days, including rating, number of hours slept, etc.
 public class DisplayCustomStats extends AppCompatActivity {
@@ -134,18 +137,23 @@ public class DisplayCustomStats extends AppCompatActivity {
         sleepQualityGraph.removeAllSeries();
     }
 
-    //TODO: maybe make this a little nicer
     private boolean isValidDate(int day, int month, int year) {
+        Set<Integer> odd = new HashSet<Integer>();
+        Set<Integer> even = new HashSet<Integer>();
+        odd.addAll(Arrays.asList(new Integer[] {1, 3, 5, 7, 8, 10, 12}));
+        even.addAll(Arrays.asList(new Integer[] {4, 6, 9, 11}));
         int numDays = -1;
-        if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        // month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12
+        if(odd.contains(month)) {
             numDays = 31;
-        } else if(month == 4 || month == 6 || month == 9 || month == 11) {
+            // month == 4 || month == 6 || month == 9 || month == 11
+        } else if(even.contains(month)) {
             numDays = 30;
         } else if(month == 2) {
             if(year % 4 == 0) {
                 numDays = 29;
             } else {
-                numDays = 29;
+                numDays = 28;
             }
         }
         return (month <= 12 && day <= numDays);
