@@ -138,7 +138,6 @@
                     android:text="Average sleep quality"/>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -147,31 +146,27 @@
         android:orientation="horizontal"
         android:weightSum="100"
         android:layout_alignParentBottom="true">
+
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_bedtime_24"
-            android:layout_weight="50.0"
             android:onClick="goToGetSleepInfo"/>
-
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="33.3"
             android:background="@color/white"
-            android:src="@drawable/ic_baseline_show_chart_24"
-            android:layout_weight="50.0" />
-
+            android:src="@drawable/ic_baseline_show_chart_24" />
         <ImageButton
-            android:id="@+id/rec_button"
-            android:layout_width="128dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50.0"
+            android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@android:drawable/ic_menu_search"
-            android:tint="#000000"
             android:onClick="goToRecommendations" />
-
     </LinearLayout>
 
 </RelativeLayout>

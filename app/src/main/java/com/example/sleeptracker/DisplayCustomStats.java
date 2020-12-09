@@ -37,7 +37,6 @@ public class DisplayCustomStats extends AppCompatActivity {
     private long totalSleepTime = 0;
     private long totalWakeTime = 0;
     private double avgHours = 0;
-    private boolean hasDates;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,6 @@ public class DisplayCustomStats extends AppCompatActivity {
         avgWakeTime = this.findViewById(R.id.average_wake_time);
         avgHoursSleep = this.findViewById(R.id.average_hours_sleep);
         avgSleepQuality = this.findViewById(R.id.average_sleep_quality);
-        hasDates = false;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -105,7 +103,6 @@ public class DisplayCustomStats extends AppCompatActivity {
                 avgHoursSleep.setText(averageStatsAndRound(totalHoursSlept, sleepStats.size()));
                 avgSleepQuality.setText(averageStatsAndRound(totalRating, numRatings) + "/10");
                 this.findViewById(R.id.display_stat_averages).setVisibility(View.VISIBLE);
-                hasDates = true;
             }
         }
     }
@@ -165,11 +162,7 @@ public class DisplayCustomStats extends AppCompatActivity {
     }
 
     public void goToRecommendations(View view) {
-        if (hasDates) {
-            // we want to send avg hours and sleep/wakeup time
-            Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, Recommendations.class);
-            activitySwitchIntent.putExtra(Recommendations.AVG_HOURS, avgHours);
-            startActivity(activitySwitchIntent);
-        }
+        Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, Recommendations.class);
+        startActivity(activitySwitchIntent);
     }
 }

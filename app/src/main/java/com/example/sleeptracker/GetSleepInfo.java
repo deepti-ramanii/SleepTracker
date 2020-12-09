@@ -70,4 +70,9 @@ public class GetSleepInfo extends AppCompatActivity implements RatingDialog.Rati
         Intent activitySwitchIntent = new Intent(GetSleepInfo.this, DisplayCustomStats.class);
         startActivity(activitySwitchIntent);
     }
+
+    public void goToRecommendations(View view) {
+        Intent activitySwitchIntent = new Intent(GetSleepInfo.this, Recommendations.class);
+        startActivity(activitySwitchIntent);
+    }
 }

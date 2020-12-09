@@ -20,6 +20,9 @@
         <activity
             android:label="Display Custom Stats"
             android:name=".DisplayCustomStats" />
+        <activity
+            android:label="Recommendations"
+            android:name=".Recommendations" />
     </application>
 
 </manifest>

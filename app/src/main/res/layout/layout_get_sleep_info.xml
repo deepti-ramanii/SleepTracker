@@ -19,30 +19,26 @@
         android:layout_alignParentBottom="true">
 
         <ImageButton
-            android:id="@+id/imageButton3"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50.0"
+            android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_bedtime_24"/>
 
         <ImageButton
-            android:id="@+id/imageButton4"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50.0"
+            android:layout_weight="33.3"
             android:background="@color/white"
-            android:onClick="goToDisplayStats"
-            android:src="@drawable/ic_baseline_show_chart_24" />
+            android:src="@drawable/ic_baseline_show_chart_24"
+            android:onClick="goToDisplayStats"/>
 
         <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="128dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="50.0"
+            android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@android:drawable/ic_menu_search"
-            android:tint="#B5B5B5" />
-
+            android:onClick="goToRecommendations" />
     </LinearLayout>
 </RelativeLayout>
