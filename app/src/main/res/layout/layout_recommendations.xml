@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_get_sleep_info"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <Button
-        android:id="@+id/sleep_wake_button"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:onClick="setTimes"
-        android:text="Sleep" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hourText"
+                android:layout_width="match_parent"
+                android:layout_height="109dp"
+                android:gravity="center"
+                android:text="TextView" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:weightSum="100"
-        android:layout_alignParentBottom="true">
+        android:weightSum="100">
 
         <ImageButton
-            android:id="@+id/imageButton3"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="50.0"
             android:background="@color/white"
-            android:src="@drawable/ic_baseline_bedtime_24"/>
+            android:onClick="goToGetSleepInfo"
+            android:src="@drawable/ic_baseline_bedtime_24" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="50.0"
             android:background="@color/white"
-            android:onClick="goToDisplayStats"
-            android:src="@drawable/ic_baseline_show_chart_24" />
+            android:src="@drawable/ic_baseline_show_chart_24"
+            android:onClick="goToDisplayStats" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
             android:layout_width="128dp"
             android:layout_height="fill_parent"
             android:layout_weight="50.0"
             android:background="@color/white"
             android:src="@android:drawable/ic_menu_search"
-            android:tint="#B5B5B5" />
+            android:tint="#000000" />
 
     </LinearLayout>
+
 </RelativeLayout>

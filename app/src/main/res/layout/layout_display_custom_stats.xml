@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -149,12 +150,24 @@
             android:src="@drawable/ic_baseline_bedtime_24"
             android:layout_weight="50.0"
             android:onClick="goToGetSleepInfo"/>
+
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_show_chart_24"
-            android:layout_weight="50.0"/>
+            android:layout_weight="50.0" />
+
+        <ImageButton
+            android:id="@+id/rec_button"
+            android:layout_width="128dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="50.0"
+            android:background="@color/white"
+            android:src="@android:drawable/ic_menu_search"
+            android:tint="#000000"
+            android:onClick="goToRecommendations" />
+
     </LinearLayout>
 
 </RelativeLayout>
