@@ -23,6 +23,7 @@ public class RatingDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.layout_rating_dialog, null);
 
+        ratingInput = view.findViewById(R.id.rating);
         builder.setView(view)
                .setTitle("Rate your sleep?")
                .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -48,8 +49,6 @@ public class RatingDialog extends AppCompatDialogFragment {
                        }
                    }
                });
-
-        ratingInput = view.findViewById(R.id.rating);
         AlertDialog alert = builder.create();
         alert.setCanceledOnTouchOutside(false);
         return alert;
