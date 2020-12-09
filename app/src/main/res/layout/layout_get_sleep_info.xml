@@ -31,7 +31,7 @@
             android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_show_chart_24"
-            android:onClick="goToDisplayStats"/>
+            android:onClick="getSleepInfoToDisplayStats"/>
 
         <ImageButton
             android:layout_width="fill_parent"
@@ -39,6 +39,6 @@
             android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@android:drawable/ic_menu_search"
-            android:onClick="goToRecommendations" />
+            android:onClick="getSleepInfoToRecommendations" />
     </LinearLayout>
 </RelativeLayout>

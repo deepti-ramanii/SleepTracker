@@ -1,20 +1,20 @@
 package com.example.sleeptracker;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.Cursor;
+import android.content.ContentValues;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class SleepStatsDatabase extends SQLiteOpenHelper {
-    //database info
     private static final String SLEEP_STATS_DB_NAME = "SLEEP_STATS.DB";
     private static final int SLEEP_STATS_DB_VERSION = 1;
     public static final String SLEEP_STATS_TABLE = "SLEEP_STATS";
-    //table column info
+
     public static final String ID = "ID";
     public static final String SLEEP_TIME = "SLEEP_TIME";
     public static final String WAKE_TIME = "WAKE_TIME";

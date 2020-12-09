@@ -1,34 +1,29 @@
 package com.example.sleeptracker;
-import android.content.Intent;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import br.com.sapereaude.maskedEditText.MaskedEditText; // https://www.geeksforgeeks.org/how-to-add-mask-to-an-edittext-in-android/ -> tutorial for creating a masked EditText
-
+import android.content.Intent;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
+import android.widget.TextView;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import br.com.sapereaude.maskedEditText.MaskedEditText; // https://www.geeksforgeeks.org/how-to-add-mask-to-an-edittext-in-android/ -> tutorial for creating a masked EditText
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 //displays sleep stats between a set of days, including rating, number of hours slept, etc.
 public class DisplayCustomStats extends AppCompatActivity {
     private SleepStatsDatabase sleepStatsDatabase;
 
     private MaskedEditText startDate, endDate;
-
     private GraphView sleepQualityGraph;
     private TextView avgSleepTime, avgWakeTime, avgHoursSleep, avgSleepQuality;
 
@@ -36,7 +31,6 @@ public class DisplayCustomStats extends AppCompatActivity {
     private double totalRating = 0.0;
     private long totalSleepTime = 0;
     private long totalWakeTime = 0;
-    private double avgHours = 0;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +81,9 @@ public class DisplayCustomStats extends AppCompatActivity {
                 int numRatings = 0;
                 for (SleepStats stats : sleepStats) {
                     int rating = stats.getRating();
-                    if(rating != -1) {
-                        totalRating += stats.getRating();
-                        sleepQualityData.appendData(new DataPoint(numRatings, stats.getRating()), true, sleepStats.size());
+                    if(rating >= 0) {
+                        totalRating += rating;
+                        sleepQualityData.appendData(new DataPoint(numRatings, rating), true, sleepStats.size());
                         numRatings++;
                     }
                     totalHoursSlept += stats.getHoursSlept();
@@ -97,7 +91,6 @@ public class DisplayCustomStats extends AppCompatActivity {
                     totalWakeTime = Long.sum(totalWakeTime, stats.getWakeTime());
                 }
                 sleepQualityGraph.addSeries(sleepQualityData);
-                avgHours = totalWakeTime / sleepStats.size();
                 avgSleepTime.setText(averageTime(totalSleepTime, sleepStats.size()));
                 avgWakeTime.setText(averageTime(totalWakeTime, sleepStats.size()));
                 avgHoursSleep.setText(averageStatsAndRound(totalHoursSlept, sleepStats.size()));
@@ -135,15 +128,13 @@ public class DisplayCustomStats extends AppCompatActivity {
     }
 
     private boolean isValidDate(int day, int month, int year) {
-        Set<Integer> odd = new HashSet<Integer>();
-        Set<Integer> even = new HashSet<Integer>();
+        List<Integer> odd = new ArrayList<>();
+        List<Integer> even = new ArrayList<Integer>();
         odd.addAll(Arrays.asList(new Integer[] {1, 3, 5, 7, 8, 10, 12}));
         even.addAll(Arrays.asList(new Integer[] {4, 6, 9, 11}));
         int numDays = -1;
-        // month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12
         if(odd.contains(month)) {
             numDays = 31;
-            // month == 4 || month == 6 || month == 9 || month == 11
         } else if(even.contains(month)) {
             numDays = 30;
         } else if(month == 2) {
@@ -156,12 +147,12 @@ public class DisplayCustomStats extends AppCompatActivity {
         return (month <= 12 && day <= numDays);
     }
 
-    public void goToGetSleepInfo(View view) {
+    public void displayStatsToGetSleepInfo(View view) {
         Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, GetSleepInfo.class);
         startActivity(activitySwitchIntent);
     }
 
-    public void goToRecommendations(View view) {
+    public void displayStatsToRecommendations(View view) {
         Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, Recommendations.class);
         startActivity(activitySwitchIntent);
     }

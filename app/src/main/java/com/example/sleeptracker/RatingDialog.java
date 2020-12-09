@@ -1,16 +1,17 @@
 package com.example.sleeptracker;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import android.content.Context;
+import android.os.Bundle;
+import androidx.annotation.Nullable;
+
+import android.app.Dialog;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import android.view.View;
+import android.view.LayoutInflater;
+import android.widget.EditText;
 
 public class RatingDialog extends AppCompatDialogFragment {
     private EditText ratingInput;
@@ -24,6 +25,12 @@ public class RatingDialog extends AppCompatDialogFragment {
 
         builder.setView(view)
                .setTitle("Rate your sleep?")
+               .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        listener.applyRating(-1);
+                    }
+               })
                .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
@@ -33,17 +40,19 @@ public class RatingDialog extends AppCompatDialogFragment {
                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-                       int rating;
                        if(ratingInput.getText().toString().length() < 1) {
-                           listener.applyRating(-1);
+                           listener.applyRating(0);
+                       } else {
+                           int rating = Integer.parseInt(ratingInput.getText().toString());
+                           listener.applyRating(Math.min(rating, 10));
                        }
-                       rating = Integer.parseInt(ratingInput.getText().toString());
-                       listener.applyRating(rating);
                    }
                });
 
         ratingInput = view.findViewById(R.id.rating);
-        return builder.create();
+        AlertDialog alert = builder.create();
+        alert.setCanceledOnTouchOutside(false);
+        return alert;
     }
 
     @Override

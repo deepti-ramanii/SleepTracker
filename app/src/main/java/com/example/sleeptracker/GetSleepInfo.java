@@ -1,21 +1,21 @@
 package com.example.sleeptracker;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
+import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.Button;
 
 import java.util.Calendar;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class GetSleepInfo extends AppCompatActivity implements RatingDialog.RatingDialogListener {
     private SleepStatsDatabase sleepStatsDatabase;
     private Button sleepWakeButton;
     private boolean hasStoredSleepTime;
     private long storedSleepTime;
-    private int storedRating;
+    private long storedWakeTime;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class GetSleepInfo extends AppCompatActivity implements RatingDialog.Rati
         long currTime = Calendar.getInstance().getTimeInMillis();
         if(hasStoredSleepTime) {
             setRating();
-            sleepStatsDatabase.insert(storedSleepTime, currTime, storedRating);
+            storedWakeTime = currTime;
             sleepWakeButton.setText("Sleep");
         } else {
             storedSleepTime = currTime;
@@ -56,22 +56,22 @@ public class GetSleepInfo extends AppCompatActivity implements RatingDialog.Rati
         hasStoredSleepTime = !hasStoredSleepTime;
     }
 
-    public void setRating() {
+    private void setRating() {
         RatingDialog ratingDialog = new RatingDialog();
         ratingDialog.show(getSupportFragmentManager(), "submit rating");
     }
 
     @Override
     public void applyRating(int rating) {
-        storedRating = rating;
+        sleepStatsDatabase.insert(storedSleepTime, storedWakeTime, rating);
     }
 
-    public void goToDisplayStats(View view) {
+    public void getSleepInfoToDisplayStats(View view) {
         Intent activitySwitchIntent = new Intent(GetSleepInfo.this, DisplayCustomStats.class);
         startActivity(activitySwitchIntent);
     }
 
-    public void goToRecommendations(View view) {
+    public void getSleepInfoToRecommendations(View view) {
         Intent activitySwitchIntent = new Intent(GetSleepInfo.this, Recommendations.class);
         startActivity(activitySwitchIntent);
     }

@@ -32,10 +32,6 @@ public class SleepStats {
         return this.hoursSlept;
     }
 
-    public String toString() {
-        return "Sleep stats on " + getDateFromLong(sleepTime).toString() + ": slept " + hoursSlept + " hours, " + rating + "/10";
-    }
-
     public static Date getDateFromLong(long dateInMilliseconds) {
         return new Date(dateInMilliseconds);
     }

@@ -1,16 +1,15 @@
 package com.example.sleeptracker;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
+import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 //assuming that a week is sunday -> saturday, provides recommendations for the rest of the week based on what you've already slept
 public class Recommendations extends AppCompatActivity {
@@ -72,12 +71,12 @@ public class Recommendations extends AppCompatActivity {
         displayAvgSleep.setText((String.format("You've slept an average of %.2f hours each day this week.", totalHoursOfSleep)));
     }
 
-    public void goToDisplayStats(View view) {
+    public void recommendationsToDisplayStats(View view) {
         Intent activitySwitchIntent = new Intent(Recommendations.this, DisplayCustomStats.class);
         startActivity(activitySwitchIntent);
     }
 
-    public void goToGetSleepInfo(View view) {
+    public void recommendationsToGetSleepInfo(View view) {
         Intent activitySwitchIntent = new Intent(Recommendations.this, GetSleepInfo.class);
         startActivity(activitySwitchIntent);
     }

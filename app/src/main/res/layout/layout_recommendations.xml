@@ -46,14 +46,14 @@
             android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_bedtime_24"
-            android:onClick="goToGetSleepInfo"/>
+            android:onClick="recommendationsToGetSleepInfo"/>
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="33.3"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_show_chart_24"
-            android:onClick="goToDisplayStats"/>
+            android:onClick="recommendationsToDisplayStats"/>
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
