@@ -27,12 +27,17 @@ public class RatingDialog extends AppCompatDialogFragment {
                .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
+                       listener.applyRating(-1);
                    }
                })
                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
-                       int rating = Integer.parseInt(ratingInput.getText().toString());
+                       int rating;
+                       if(ratingInput.getText().toString().length() < 1) {
+                           listener.applyRating(-1);
+                       }
+                       rating = Integer.parseInt(ratingInput.getText().toString());
                        listener.applyRating(rating);
                    }
                });
