@@ -54,12 +54,14 @@
             android:background="@color/white"
             android:src="@drawable/ic_baseline_show_chart_24"
             android:onClick="recommendationsToDisplayStats"/>
+
         <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="33.3"
             android:background="@color/white"
-            android:src="@android:drawable/ic_menu_search" />
+            android:src="@android:drawable/ic_menu_search"
+            android:tint="#000000" />
 
     </LinearLayout>
 

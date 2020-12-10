@@ -13,14 +13,16 @@ import java.util.Calendar;
 
 //assuming that a week is sunday -> saturday, provides recommendations for the rest of the week based on what you've already slept
 public class Recommendations extends AppCompatActivity {
-    private SleepStatsDatabase sleepStatsDatabase;
-    private static final int MAXHOURS = 9;
-    private static final int MINHOURS = 7;
+    private SleepStatsDatabase sleepStatsDatabase;  // sleep stats
+    private static final int MAXHOURS = 9;  // maximum hours of sleep recommended each night
+    private static final int MINHOURS = 7;  // minimum hours of sleep recommended each night
 
+    // text components
     private TextView displayAvgSleep;
     private TextView displayRecommendations;
     private TextView displayDate;
 
+    // days of week
     private long beginningOfWeek;
     private long currDate;
 
@@ -47,6 +49,8 @@ public class Recommendations extends AppCompatActivity {
         getSleepRecommendation();
     }
 
+    // if the average sleep is below the minimum recommended hours, state how many hours are need each night
+    //   to reach the recommended average
     private void getSleepRecommendation() {
         List<SleepStats> weeklyStats = sleepStatsDatabase.getBetweenDates(beginningOfWeek, currDate);
         if(weeklyStats.size() <= 0) {
@@ -71,11 +75,13 @@ public class Recommendations extends AppCompatActivity {
         displayAvgSleep.setText((String.format("You've slept an average of %.2f hours each day this week.", totalHoursOfSleep)));
     }
 
+    // switches page to DisplayStats
     public void recommendationsToDisplayStats(View view) {
         Intent activitySwitchIntent = new Intent(Recommendations.this, DisplayCustomStats.class);
         startActivity(activitySwitchIntent);
     }
 
+    // switches page to GetSleepInfo
     public void recommendationsToGetSleepInfo(View view) {
         Intent activitySwitchIntent = new Intent(Recommendations.this, GetSleepInfo.class);
         startActivity(activitySwitchIntent);
