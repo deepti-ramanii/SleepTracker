@@ -5,6 +5,11 @@ import android.content.Context;
 import java.util.Date;
 import java.util.Random;
 
+//AddingFakeData is a class that adds randomized sleep data into the database to show what a sample user might input over the course of 9 days.
+//We recommend using this fake data to test the functionality of our app, since the app uses the current calendar time for logging the user's
+//sleep and wake times. However, if you are interested in viewing the app without the fake data, you can comment out the function call in the
+//getInstance() method in the SleepStatsDatabase class.
+//We hope you enjoy our app!
 public class AddingFakeData {
     public static void addDataIntoDatabase(Context context) {
         SleepStatsDatabase sleepStatsDatabase = SleepStatsDatabase.getInstance(context);
