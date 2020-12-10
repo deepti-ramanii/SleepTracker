@@ -23,6 +23,7 @@ public class GetSleepInfo extends AppCompatActivity implements RatingDialog.Rati
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_get_sleep_info);
+        AddingFakeData.addDataIntoDatabase(this);
         sleepStatsDatabase = SleepStatsDatabase.getInstance(this);
         sleepWakeButton = this.findViewById(R.id.sleep_wake_button);
         hasStoredSleepTime = false;
