@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-//displays sleep stats between a set of days, including rating, number of hours slept, etc.
+//DisplayCustomStats allows users to view information about their sleep between a set of days
+//this information includes average sleep quality, average hours of sleep, average sleep and wake up time,
+//and trends in sleep quality
 public class DisplayCustomStats extends AppCompatActivity {
     private SleepStatsDatabase sleepStatsDatabase;
 
@@ -48,6 +50,8 @@ public class DisplayCustomStats extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
+    //retrieves the user's input for start and end dates for viewing information about their sleep and
+    //displays information based on what was logged in the database between those dates
     public void getStats(View view) {
         boolean hasValidInput = true;
         if(startDate.getText().toString().equals("DD/MM/YYYY")) {
@@ -100,6 +104,8 @@ public class DisplayCustomStats extends AppCompatActivity {
         }
     }
 
+    //given a total for a certain sleep statistic and the number of statistics, returns a string
+    //representing the average of that statistic rounded to two decimal places.
     private String averageStatsAndRound(double total, int count) {
         if(count <= 0) {
             return "0.00";
@@ -107,6 +113,8 @@ public class DisplayCustomStats extends AppCompatActivity {
         return String.format("%.2f", total / count);
     }
 
+    //given a total time as a number of milliseconds since January 1, 1970 00:00:00 UTC
+    //and the number of times, returns a string representing the average time
     private String averageTime(long totalTime, int numTimes) {
         if(numTimes <= 0) {
             return "No data.";
@@ -119,6 +127,7 @@ public class DisplayCustomStats extends AppCompatActivity {
         return time + " AM";
     }
 
+    //resets the previously displayed information in order to prepare for the next set of data
     private void resetPreviousStats() {
         totalHoursSlept = 0;
         totalRating = 0;
@@ -127,6 +136,8 @@ public class DisplayCustomStats extends AppCompatActivity {
         sleepQualityGraph.removeAllSeries();
     }
 
+    //given an integer day, month, and year, returns a boolean representing whether that date exists
+    //in the Gregorian calendar
     private boolean isValidDate(int day, int month, int year) {
         List<Integer> odd = new ArrayList<>();
         List<Integer> even = new ArrayList<Integer>();
@@ -147,11 +158,13 @@ public class DisplayCustomStats extends AppCompatActivity {
         return (month <= 12 && day <= numDays);
     }
 
+    //changes activities to the GetSleepInfo activity
     public void displayStatsToGetSleepInfo(View view) {
         Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, GetSleepInfo.class);
         startActivity(activitySwitchIntent);
     }
 
+    //changes activities to the Recommendations activity
     public void displayStatsToRecommendations(View view) {
         Intent activitySwitchIntent = new Intent(DisplayCustomStats.this, Recommendations.class);
         startActivity(activitySwitchIntent);
