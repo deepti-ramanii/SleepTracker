@@ -13,11 +13,14 @@ import android.view.View;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 
+//A RatingDialog is a pop-up dialog that allows the user to input information about their sleep
+//by rating their sleep quality from 0 to 10
 public class RatingDialog extends AppCompatDialogFragment {
     private EditText ratingInput;
     private RatingDialogListener listener;
 
     @Override
+    //creates a dialog that prompts the user to rate their quality of sleep
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -26,18 +29,23 @@ public class RatingDialog extends AppCompatDialogFragment {
         ratingInput = view.findViewById(R.id.rating);
         builder.setView(view)
                .setTitle("Rate your sleep?")
+                //if the user exits the dialog with the back button, set the rating to -1 to signify that
+                //a rating does not exist for the current sleep entry
                .setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         listener.applyRating(-1);
                     }
                })
+                //if the user exits the dialog with the given "No thanks" button, set the rating to -1
+                //to signify that a rating does not exist for the current sleep entry
                .setNegativeButton("No thanks", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
                        listener.applyRating(-1);
                    }
                })
+                //if the user chooses to submit a rating, make sure the input is valid and send to the activity
                .setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
